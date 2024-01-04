@@ -1,1 +1,2 @@
-1
+import streamlit
+streamlit.title('Had a dinner')
