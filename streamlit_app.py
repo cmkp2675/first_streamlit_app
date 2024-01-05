@@ -34,11 +34,37 @@ streamlit.dataframe(fruityvice_normalized) #display o/p as a table
 fruit_choice = streamlit.text_input('What fruit would you like information about?','Kiwi')
 streamlit.write('The user entered ', fruit_choice)
 
-import snowflake.connector
+'''import snowflake.connector
 
 my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
 my_cur = my_cnx.cursor()
 my_cur.execute("select * from fruit_load_list")
 my_data_row = my_cur.fetchone()
 streamlit.text("The fruit load list contains:")
-streamlit.text(my_data_row)
+streamlit.text(my_data_row)'''
+
+import snowflake.connector
+import streamlit as st
+
+# Assuming streamlit.secrets is properly configured with your Snowflake credentials
+
+try:
+    my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
+    my_cur = my_cnx.cursor()
+    my_cur.execute('SELECT * FROM fruit_load_list')
+
+    st.text("The fruit load list contains:")
+    
+    # Fetch all rows and display them
+    for row in my_cur.fetchall():
+        st.text(row)
+
+except snowflake.connector.errors.ProgrammingError as e:
+    st.error(f"Snowflake query execution error: {e.msg}")
+
+finally:
+    # Close the cursor and connection in the finally block to ensure it happens even if an exception occurs
+    if my_cur:
+        my_cur.close()
+    if my_cnx:
+        my_cnx.close()
