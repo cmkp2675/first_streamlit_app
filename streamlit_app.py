@@ -35,26 +35,10 @@ fruit_choice = streamlit.text_input('What fruit would you like information about
 streamlit.write('The user entered ', fruit_choice)
 
 import snowflake.connector
-import streamlit
 
-# Assuming you have stored your Snowflake credentials in Streamlit secrets
-snowflake_credentials = streamlit.secrets["snowflake"]
-
-# Connecting to Snowflake
-my_cnx = snowflake.connector.connect(**snowflake_credentials)
+my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
 my_cur = my_cnx.cursor()
-
-# Executing a query
-my_cur.execute("SELECT * FROM FRUIT_LOAD_LIST")
-
-# Fetching the data
-my_data_rows = my_cur.fetchall()
-
-# Closing the cursor and connection
-my_cur.close()
-my_cnx.close()
-
-# Displaying the data in a Streamlit app
+my_cur.execute("select * from PC_RIVERY_DB.PUBLIC.FRUIT_LOAD_LIST")
+my_data_rows = my_cur.fetchall
 streamlit.header("The fruit load list contains:")
-streamlit.dataframe(my_data_rows)
-
+streamlit.dataframe(my_data_rows) #they are closed regardless of success or failure
