@@ -45,7 +45,7 @@ my_cnx = snowflake.connector.connect(**snowflake_credentials)
 my_cur = my_cnx.cursor()
 
 # Executing a query
-my_cur.execute("SELECT * FROM PC_RIVERY_DB.PUBLIC.FRUIT_LOAD_LIST")
+my_cur.execute("SELECT * FROM FRUIT_LOAD_LIST")
 
 # Fetching the data
 my_data_rows = my_cur.fetchall()
