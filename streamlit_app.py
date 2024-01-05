@@ -1,5 +1,4 @@
 import streamlit
-import snowflake.connector
 
 streamlit.header('Breakfast Menu')
 streamlit.text('🥣Omega 3 & Blueberry Oatmeal')
@@ -35,6 +34,7 @@ streamlit.dataframe(fruityvice_normalized) #display o/p as a table
 fruit_choice = streamlit.text_input('What fruit would you like information about?','Kiwi')
 streamlit.write('The user entered ', fruit_choice)
 
+import snowflake.connector
 
 import requests
 fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + fruit_choice)
