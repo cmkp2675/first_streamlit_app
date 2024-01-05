@@ -54,16 +54,16 @@ try:
     my_cur.execute('SELECT * FROM fruit_load_list')
 
     st.text("The fruit load list contains:")
-    
+
     # Fetch all rows and display them
     for row in my_cur.fetchall():
         st.text(row)
 
-except snowflake.connector.errors.ProgrammingError as e:
-    st.error(f"Snowflake query execution error: {e.msg}")
+except snowflake.connector.errors.DatabaseError as e:
+    st.error(f"Snowflake Database Error: {e.msg}")
 
 finally:
-    # Close the cursor and connection in the finally block to ensure it happens even if an exception occurs
+    # Close the cursor and connection in the finally block to ensure proper cleanup
     if my_cur:
         my_cur.close()
     if my_cnx:
