@@ -35,10 +35,21 @@ fruit_choice = streamlit.text_input('What fruit would you like information about
 streamlit.write('The user entered ', fruit_choice)
 
 import snowflake.connector
+import streamlit as st
+
+# Assuming streamlit.secrets is properly configured with your Snowflake credentials
 
 my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
 my_cur = my_cnx.cursor()
-my_cur.execute('SELECT * from fruit_load_list')
-my_data_row = my_cur.fetchone()
-streamlit.text("The fruit load list contains:")
-streamlit.text(my_data_row)
+my_cur.execute('SELECT * FROM fruit_load_list')
+
+st.text("The fruit load list contains:")
+
+# Fetch all rows and display them
+for row in my_cur.fetchall():
+    st.text(row)
+
+# Close the cursor and connection
+my_cur.close()
+my_cnx.close()
+
