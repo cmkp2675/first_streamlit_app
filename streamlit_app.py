@@ -1,5 +1,6 @@
 import streamlit
 import snowflake.connector
+import python
 
 streamlit.header('Breakfast Menu')
 streamlit.text('🥣Omega 3 & Blueberry Oatmeal')
