@@ -51,13 +51,13 @@ import streamlit as st
 try:
     my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
     my_cur = my_cnx.cursor()
-    my_cur.execute('SELECT * FROM fruit_load_list')
+    my_cur.execute("SELECT * FROM fruit_load_list")
 
-    st.text("The fruit load list contains:")
+    st.header("The fruit load list contains:")
 
     # Fetch all rows and display them
     for row in my_cur.fetchall():
-        st.text(row)
+        st.dataframe(my_data_row)
 
 except snowflake.connector.errors.DatabaseError as e:
     st.error(f"Snowflake Database Error: {e.msg}")
