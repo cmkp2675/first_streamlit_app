@@ -36,9 +36,33 @@ streamlit.write('The user entered ', fruit_choice)
 
 import snowflake.connector
 
-my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
-my_cur = my_cnx.cursor()
-my_cur.execute("SELECT CURRENT_USER(), CURRENT_ACCOUNT(), CURRENT_REGION()")
-my_data_row = my_cur.fetchone()
-streamlit.text("Hello from Snowflake:")
-streamlit.text(my_data_row)
+PASSWORD = 'CMpradeep@1
+USER = 'VMIYEVV.VV91059'
+ACCOUNT = 'CMKP2675'
+WAREHOUSE = 'PC_RIVERY_WH'
+DATABASE = 'PC_RIVERY_DB'
+SCHEMA = 'PUBLIC'
+
+con = snowflake.connector.connect(
+  user=USER,
+  password=PASSWORD,
+  account=ACCOUNT,
+  warehouse=WAREHOUSE,
+  database=DATABASE,
+  schema=SCHEMA
+)
+print("Connecting...")
+
+con.cursor().execute("USE WAREHOUSE " + WAREHOUSE)
+con.cursor().execute("USE DATABASE " + DATABASE)
+#con.cursor().execute("USE SCHEMA INFORMATION_SCHEMA")
+
+
+try:
+    result = con.cursor().execute("Select * from <TABLE>")
+    result_list = result.fetchall()
+    print(result_list)
+
+finally:
+    con.cursor().close()
+con.cursor().close()
