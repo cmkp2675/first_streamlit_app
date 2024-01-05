@@ -35,34 +35,3 @@ fruit_choice = streamlit.text_input('What fruit would you like information about
 streamlit.write('The user entered ', fruit_choice)
 
 import snowflake.connector
-
-PASSWORD = 'CMpradeep@1
-USER = 'VMIYEVV.VV91059'
-ACCOUNT = 'CMKP2675'
-WAREHOUSE = 'PC_RIVERY_WH'
-DATABASE = 'PC_RIVERY_DB'
-SCHEMA = 'PUBLIC'
-
-con = snowflake.connector.connect(
-  user=USER,
-  password=PASSWORD,
-  account=ACCOUNT,
-  warehouse=WAREHOUSE,
-  database=DATABASE,
-  schema=SCHEMA
-)
-print("Connecting...")
-
-con.cursor().execute("USE WAREHOUSE " + WAREHOUSE)
-con.cursor().execute("USE DATABASE " + DATABASE)
-#con.cursor().execute("USE SCHEMA INFORMATION_SCHEMA")
-
-
-try:
-    result = con.cursor().execute("Select * from <TABLE>")
-    result_list = result.fetchall()
-    print(result_list)
-
-finally:
-    con.cursor().close()
-con.cursor().close()
