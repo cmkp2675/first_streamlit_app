@@ -34,13 +34,35 @@ streamlit.dataframe(fruityvice_normalized) #display o/p as a table
 fruit_choice = streamlit.text_input('What fruit would you like information about?','Kiwi')
 streamlit.write('The user entered ', fruit_choice)
 
-import snowflake.connector
-client_session_keep_alive = "True"
+'''import snowflake.connector
 
 my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
 my_cur = my_cnx.cursor()
 my_cur.execute("select * from fruit_load_list")
 my_data_rows = my_cur.fetchall
 streamlit.header("The fruit load list contains:")
-streamlit.dataframe(my_data_rows)
+streamlit.dataframe(my_data_rows)'''
+
+import snowflake.connector
+import streamlit as st
+
+try:
+    my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
+    my_cur = my_cnx.cursor()
+    my_cur.execute("SELECT * FROM fruit_load_list")
+
+    st.text("The fruit load list contains:")
+
+    # Fetch all rows and display them
+    for row in my_cur.fetchall():
+        st.text(row)
+
+except Exception as e:
+    st.error(f"Error: {str(e)}")
+
+finally:
+    # Close the cursor and connection in the finally block to ensure they are closed regardless of success or failure.
+    my_cur.close()
+    my_cnx.close()
+
 
