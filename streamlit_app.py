@@ -36,11 +36,7 @@ streamlit.write('The user entered ', fruit_choice)
 
 import snowflake.connector
 
-import snowflake.connector
-
-fruit_name = "jackfruit"
-add_my_fruit_url = f"https://fruityvice.com/api/fruit/{fruit_name}"
-response = requests.put(add_my_fruit_url)
+add_my_fruit = "jackfruit"
 
 #my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
 #my_cur = my_cnx.cursor()
