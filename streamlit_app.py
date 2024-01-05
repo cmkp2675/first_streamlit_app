@@ -1,4 +1,6 @@
 import streamlit
+import snowflake.connector
+
 streamlit.header('Breakfast Menu')
 streamlit.text('🥣Omega 3 & Blueberry Oatmeal')
 streamlit.text('🥗Kale, Spinach & Rocket Smoothie')
@@ -37,4 +39,3 @@ streamlit.write('The user entered ', fruit_choice)
 import requests
 fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + fruit_choice)
 
-import snowflake.connector
