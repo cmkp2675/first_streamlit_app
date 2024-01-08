@@ -1,7 +1,7 @@
-import streamlit
-import pandas
-import requests
-import snowflake.connector
+#import streamlit
+#import pandas
+#import requests
+#import snowflake.connector
 from urllib.error inmport URLError
 
 streamlit.header('Breakfast Menu')
