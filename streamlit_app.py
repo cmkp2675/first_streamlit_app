@@ -42,3 +42,6 @@ my_cur.execute("select * from PC_RIVERY_DB.PUBLIC.FRUIT_LOAD_LIST")
 my_data_rows = my_cur.fetchall()
 streamlit.header("The fruit load list contains:")
 streamlit.dataframe(my_data_rows) #they are closed regardless of success or failure
+
+
+add_my_fruit = requests.put("https://fruityvice.com/api/fruit/" + "jackfruit")
