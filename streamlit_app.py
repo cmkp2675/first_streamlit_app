@@ -45,7 +45,7 @@ streamlit.dataframe(my_data_rows) #they are closed regardless of success or fail
 
 add_my_fruit=streamlit.text_input('What fruit would you like to add', 'jackfruit')
 
-streamlit.write('Thanks for adding jackfruit ', add_my_fruit)
+streamlit.write('Thanks for adding', add_my_fruit)
 
 
 my_cur.execute ("insert into fruit_load_list values ('from streamlit')")
