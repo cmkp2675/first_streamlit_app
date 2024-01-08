@@ -43,6 +43,6 @@ my_data_rows = my_cur.fetchall()
 streamlit.header("The fruit load list contains:")
 streamlit.dataframe(my_data_rows) #they are closed regardless of success or failure
 
-
-add_my_fruit = requests.POST("https://fruityvice.com/api/fruit/" + "jackfruit")
-#streamlit.text(fruityvice_response.json()) #writes data in JSON format
+add_my_fruit=streamlit.text_input('What fruit would you like to add', 'jackfruit')
+streamlit.write('The user entered ', fruit_choice)
+streamlit.dataframe('Thanks for adding jackfruit')
