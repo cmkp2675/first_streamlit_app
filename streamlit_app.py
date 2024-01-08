@@ -44,4 +44,5 @@ streamlit.header("The fruit load list contains:")
 streamlit.dataframe(my_data_rows) #they are closed regardless of success or failure
 
 
-add_my_fruit = requests.put("https://fruityvice.com/api/fruit/" + "jackfruit")
+add_my_fruit = requests.POST("https://fruityvice.com/api/fruit/" + "jackfruit")
+#streamlit.text(fruityvice_response.json()) #writes data in JSON format
