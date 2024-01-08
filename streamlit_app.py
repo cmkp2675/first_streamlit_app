@@ -29,8 +29,19 @@ st.header("Fruityvice Fruit Advice!")
 
 def get_fruityvice_data(this_fruit_choice):
     fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + this_fruit_choice)
-    fruityvice_normalized = pd.json_normalize(fruityvice_response.json())
-    return fruityvice_normalized
+    
+    # Check if the request was successful (status code 200)
+    if fruityvice_response.status_code == 200:
+        # Check if the response has content (not None)
+        if fruityvice_response.content:
+            # Attempt to normalize the JSON response
+            fruityvice_normalized = pd.json_normalize(fruityvice_response.json())
+            return fruityvice_normalized
+        else:
+            st.error("Empty response from Fruityvice API")
+    else:
+        st.error(f"Fruityvice API request failed with status code: {fruityvice_response.status_code}")
+    return None
 
 try:
     fruit_choice = st.text_input('What fruit would you like information about?')
@@ -38,10 +49,11 @@ try:
         st.error("Please select the fruit to get information")
     else:
         back_from_function = get_fruityvice_data(fruit_choice)
-        st.dataframe(back_from_function)
+        if back_from_function is not None:
+            st.dataframe(back_from_function)
 except URLError as e:
     st.error(e)
-
+    
 my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
 my_cur = my_cnx.cursor()
 my_cur.execute("select * from PC_RIVERY_DB.PUBLIC.FRUIT_LOAD_LIST")
